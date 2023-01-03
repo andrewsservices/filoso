@@ -1,0 +1,71 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-main",
+      "settings": {
+        "quote": "",
+        "name": ""
+      }
+    },
+    "extra-content": {
+      "type": "extra-product-content",
+      "blocks": {
+        "193ab4d3-315a-4e2a-8524-9de977f23a55": {
+          "type": "text-left-image-right",
+          "settings": {
+            "heading": "Shaving your clients now will be 100% easier",
+            "subHeading": "",
+            "rich-text": "<p>Filoso Razor Blades come in a whole-double edge razor blade you simply snap in half and create two blades. Each side of the blade can be loaded in a single-edge razor holder to double the lifespan of each box. 100 razors turn to 200 razors if you decide to snap them. <\/p>",
+            "image": "shopify:\/\/shop_images\/banner_002.jpg"
+          }
+        },
+        "86e7eb49-e988-4442-93cd-976257079b11": {
+          "type": "text-right-image-left",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/banner_001.jpg",
+            "heading": "FOR EVERY HAIR TYPE",
+            "subHeading": "NO NEED TO WONDER, THESE RAZOR BLADES WILL CUT THROUGH ALL HAIR TYPES.",
+            "rich-text": "<p>Filoso Razor Blades are sharp enough to allow any hair to reap the benefits. Whether you have fine, medium, or curly hair, Filoso Razor Blades will cut through it like butter. <\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "193ab4d3-315a-4e2a-8524-9de977f23a55",
+        "86e7eb49-e988-4442-93cd-976257079b11"
+      ],
+      "settings": {
+        "showExtraContent": true
+      }
+    },
+    "blue-description-box": {
+      "type": "blue-description-box",
+      "blocks": {
+        "a61f2367-9edf-435c-8bd1-278db1d1db6d": {
+          "type": "description-box",
+          "settings": {
+            "heading-column1": "Consistent. Long Lasting. Super Sharp.",
+            "subheading-column2": "IT'S MORE THAN A HIGH-QUALITY TOOL, IT’S A TRANSFER OF CONFIDENCE.",
+            "rich-text": "<p>With one single razor blade, you can shave quickly, achieve a smooth close shave, and feel the poise and confidence of a high-quality razor blade <\/p><p>At a 100 pack, Filoso razor blades can last an average of 1-2 years for personal daily use or 1 month for single use at the barbershop servicing your clients.<\/p><p>To apply it, simply load a full blade into your Filoso Double edge razor or 1 half blade into your Filoso Single Edge razor to create a smooth, clean finish, instantly giving you the feeling of confidence and satisfaction.<\/p><p>Try it today, and see what Filoso Razor Blades can do for you.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "a61f2367-9edf-435c-8bd1-278db1d1db6d"
+      ],
+      "settings": {
+        "showDescriptionBox": true
+      }
+    },
+    "review": {
+      "type": "review-content",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main",
+    "extra-content",
+    "blue-description-box",
+    "review"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-main",
+      "settings": {
+        "quote": "",
+        "name": ""
+      }
+    },
+    "extra-content": {
+      "type": "extra-product-content",
+      "settings": {
+        "showExtraContent": false
+      }
+    },
+    "blue-description-box": {
+      "type": "blue-description-box",
+      "blocks": {
+        "a86d57c6-8375-44e3-88da-395ef9d94a67": {
+          "type": "description-box",
+          "settings": {
+            "heading-column1": "Texture. Body. Volume.",
+            "subheading-column2": "THIS MULTIPURPOSE SPRAY GIVES YOU MANYDIFFERENT STYLES ALL IN ONE BOTTLE.",
+            "rich-text": "<p>With one single bottle, you can style your hair in seconds, achieve flexibility, and double the lifespan of your current product(s).<\/p><p>At only 8.8 oz., Filoso Sea Salt Spray lasts an average of 9-12 months with daily use. <\/p><p>To apply it, simply spray 5-7 times onto your hair or into your hands to create a natural textured finish, instantly giving you the feeling of confidence and satisfaction.<\/p><p>Try it today, and see what Filoso Sea Salt Spray can do for you.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "a86d57c6-8375-44e3-88da-395ef9d94a67"
+      ],
+      "settings": {
+        "showDescriptionBox": true
+      }
+    },
+    "review": {
+      "type": "review-content",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main",
+    "extra-content",
+    "blue-description-box",
+    "review"
+  ]
+}

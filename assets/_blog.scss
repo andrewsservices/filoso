@@ -1,0 +1,295 @@
+.blog-container{
+    padding: 30px;
+    margin: 0 auto;
+    background-color: white;
+    h1{
+        font-family: $secondary-font;
+        font-size: 75px;
+    }
+    .header{
+        height: 200px;
+        display:flex;
+        justify-content: end;
+        align-items: flex-end;
+        margin: 0 auto;
+        margin-bottom: 30px;
+        max-width: 1200px;
+    }
+    .blogs{
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        .blog{
+            max-width: 100%;
+            height: auto;
+            margin: 30px 0;
+            
+            .blog-image{
+                width: 100%;
+                min-height: 330px;
+            }
+            .blog-content{
+                background-color: #213164;
+                color: white;
+                padding: 30px;
+                width: 80%;
+                margin: 0 auto;
+                position: relative;
+                overflow: hidden;
+                top: -50px;
+                .blog-date{
+                    width: 150px;
+                    position: absolute;
+                    top: 10px;
+                    right: 0px;
+                    border-right: 5px solid #ccc;
+                    p{
+                        background-color: white;
+                        color: black;
+                        font-size: 14px;
+                        margin: 0px;
+                        padding-left: 10px;
+                    }
+                }
+                h5{
+                    font-size: 17px;
+                    font-weight: bold;
+                    margin-top: 30px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    // needs it because some titles are longer than others
+                    min-height: 60px;
+                }
+                .read-more{
+                    display: inline-block;
+                    a{
+                        background-color: white;
+                        color: black;
+                        font-size: 13px;
+                        padding: 2px 13px;
+                        font-weight: bold;
+                        color: #000;
+                        transition: all .25s ease-in-out;
+                        &:hover {
+                            color: #fff;
+                            background: $secondaryColor;
+                        } 
+                    }  
+                }
+                .truncated-paragraph p, .truncated-paragraph p span, .truncated-paragraph span {
+                    font-size: 14px;
+                    color: #ddd;
+                    line-height: 21px;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 860px){
+        .header {
+            padding: 0px 30px;
+        }
+        .blogs {
+            padding: 0px 30px;
+            display: block;
+            .blog {
+                .blog-content {
+                    top: 0px;
+                    width: 100%;
+                    h5 {
+                        min-height: 0;
+                    }
+                }
+            }
+        }
+    }
+    .paginate{
+        margin: 0 auto;
+        a{
+            color: black;
+        }
+        li{
+            padding: 5px 10px;
+        }
+        .pagination{
+            display:flex;
+            justify-content: center;
+            .active{
+                font-weight: bold;
+                border-bottom: 1px solid black;
+            }
+        }
+    }
+}
+
+
+
+.article-container{
+    width: 100%;
+    background-color: white;
+    padding-top: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &.no-padding-top {
+        padding-top: 0px;
+    }
+    img{
+        width: 1200px;
+    }
+    .blog-content{
+        width: 1200px;
+        margin-top: 50px;
+        box-sizing: border-box;
+        position: relative;
+        .blog-article{
+            width: 850px;
+            margin: 0 auto 30px auto;
+            .back-button{
+                position: absolute;
+                left: 0;
+                margin-top: 10px;
+                a{
+                    font-weight: bold;
+                    color: #000;
+                }
+            }
+            h1{
+                font-size: 28px;
+                margin-bottom: 50px;
+            }
+            p{
+                
+            }
+            img{
+                max-width: 100%;
+            }
+        }
+    }
+    .recommended-products{
+        width: 100%;
+        padding: 50px;
+        .title{
+            text-align: center;
+            h1{
+                font-size: 75px;
+                margin-bottom: 15px;
+                font-family: $secondary-font;
+                @media screen and (max-width: 600px){
+                    font-size: 9vw;
+                }
+            }
+        }
+    }
+    .products{
+        display:grid;
+        grid-gap: 30px;
+        padding: 30px 0px;
+        grid-template-columns: repeat(3, 1fr);
+        & > a{
+            align-self: flex-start;
+            justify-self: flex-start;
+            margin: 0 auto;
+            display: block;
+            .product{
+                .img{
+                    max-width: 320px;
+                    height: 320px;
+                    display:flex;
+                    margin: 0 auto;
+                    overflow: hidden;
+                    align-items: flex-start;
+                    justify-content: center;
+                    margin-bottom: 20px;
+                    img {
+                        display: block;
+                        height: auto;
+                        width: 100%;
+                        margin: 0 auto;
+                    }
+                    @media screen and (max-width: 960px){
+                        height: 27vw;
+                    }
+                }
+                .text{
+                    height: 30%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    h2{
+                        font-size: 20px;
+                        text-align: center;
+                        color: black
+                    }
+                    span{
+                        margin-top: 10px;
+                    }
+                }
+                
+            }
+        }
+    }
+    @media screen and (max-width: 900px){
+        .recommended-products {
+            padding: 30px;
+        }
+    }
+}
+
+@media only screen and (max-width: 1406px){
+    .blog-container{
+        .blogs{
+            justify-content: center;
+        }
+    }
+}
+
+@media only screen and (max-width: 1200px){
+    .article-container{
+        padding: 200px 30px 0px 30px;
+        img{
+            width: 100%;
+        }
+        .blog-content{
+            .blog-article{
+                .back-button{
+                    position: relative;
+                    margin-bottom: 50px;
+                }
+            }
+        }
+    }
+    .products{
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 850px){
+    .blog-container{
+        padding: 0;
+        .paginate{
+            margin: 50px auto;
+        }
+    }
+    .article-container{
+        .blog-content{
+            width: 90%;
+            .blog-article{
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .blog-container{
+        .header {
+            h1 {
+                font-size: 12vw;
+            }
+        }
+    }
+}

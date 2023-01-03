@@ -1,0 +1,13 @@
+<div class="product-cta-container">
+	<div class="button-container">
+		<a href="#productTitle" class="button">Add to Cart</a>
+		<div class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div>
+	</div>
+</div>
+<div class="review-content">
+	<div class="content">
+		<h1>What are people saying about {{ product.title }}?</h1>
+		<div id="looxReviews" data-product-id="{{product.id}}" class="loox-reviews-default">{{ product.metafields.loox.reviews }}</div>
+		<br/><br/><br/>
+	</div>	
+</div>

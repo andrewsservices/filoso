@@ -1,0 +1,50 @@
+{% if section.settings.showDescriptionBox %}
+	<div class="blue-description-box">
+		<div class="content">
+			{% for block in section.blocks %}
+				{% assign type = block.type %}
+				{% case type %} 
+					{% when "description-box" %}
+					<h1>{{ block.settings.heading-column1 }}</h1>
+					<h2>{{ block.settings.subheading-column2 }}</h2>
+					<p>{{ block.settings.rich-text }}</p>
+				{% endcase %}
+			{% endfor %}
+		</div>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "showDescriptionBox",
+				"label": "Show Description Box?"
+			}
+		],
+		"blocks":[
+			{
+				"name": "Description Box",
+				"type": "description-box",
+				"settings":[
+					{
+						"type":"text",
+						"id":"heading-column1",
+						"label": "Header"
+					},
+					{
+						"type":"text",
+						"id":"subheading-column2",
+						"label": "Subheading"
+					},
+					{
+						"type":"richtext",
+						"id":"rich-text",
+						"label": "Text"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

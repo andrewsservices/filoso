@@ -1,0 +1,52 @@
+<header class="white">
+	{% if template.name == "index" %}<div class="homepage-banner">Free shipping over $30</div>{% endif %}
+	<nav>
+		<div>
+			<a href="/">
+				<img src="{{ 'filoso-logo.svg' | asset_url }}" loading="lazy" class="logo"
+					alt="Filoso Brand" />
+			</a>
+		</div>
+		<div class="text-right">
+			<ul>
+				<!-- Loops through menu items -->
+				{% for link in linklists.main-menu.links %}
+
+				<!-- Assigns link title -->
+				{% assign child_list_handle = link.title | handleize %}
+
+				<!-- If link children exists, then create parent link -->
+				{% if linklists[child_list_handle].links != blank %}
+				<!-- Dropdown container -->
+				<li class="nav-dropdown">
+					<a class="dropdown-toggle {% if link.active %}active{% endif %}" href="{{ link.url }}">
+						{{ link.title }}
+					</a>
+					<ul class="nav-dropdown-menu {{ link.handle }}">
+						{% for childlink in linklists[child_list_handle].links %}
+							<li clas="nav-dropdown-menu-item"><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+						{% endfor %}
+					</ul>
+				</li>
+				{% else %}
+
+				<!-- If not a parent link, create a regular link -->
+				<li class="nav-item">
+					<a class="{% if link.active %}active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+				</li>
+
+				{% endif %} {% endfor %}
+				<li class="mobile"><i class="bi bi-list" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+						aria-controls="offcanvasRight"></i></li>
+				<li>
+					<a href="/cart" class="cart"><i class="bi bi-bag"></i>{% if cart.item_count > 0 %}
+						<div class="cart-circled-number">
+							<div class="number">{{ cart.item_count }}</div>
+						</div>
+						{% endif %}
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>

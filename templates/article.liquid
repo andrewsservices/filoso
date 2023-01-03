@@ -1,0 +1,81 @@
+{% comment %} <div class="article-container">
+  {% assign number_of_comments = article.comments_count %}
+  {% if comment and comment.created_at %}
+  {% assign number_of_comments = article.comments_count %}
+  {% endif %}
+  <article>
+    <img src="{{ article.image.src | img_url: '1800x1200' }}" alt={{ article.image.alt }} loading="lazy" />
+    <h2>{{ article.title }}</h2>
+    <h3>{{ article.published_at | date: format: 'abbreviated_date' }} // {{ article.author }}</h3>
+    <div class="content">{{ article.content }}</div>
+  </article>
+  {% if blog.comments_enabled? %}
+  <h2>{{ number_of_comments }} comments</h2>
+  {% paginate article.comments by 5 %}
+  {% for comment in article.comments %}
+  <div>
+    <div>{{ comment.content }}</div>
+    {{ comment.author }} @ {{ comment.created_at }}
+  </div>
+  {% endfor %}
+  {% if paginate.pages > 1 %}
+  {{ paginate | default_pagination }}
+  {% endif %}
+  {% endpaginate %}
+
+  <div>
+    {% form 'new_comment', article %}
+    {{ form.errors | default_errors }}
+    <label for="CommentAuthor">name</label>
+    <input type="text" name="comment[author]" id="CommentAuthor" placeholder="name" value="{{ form.author }}"
+      autocapitalize="words">
+
+    <label for="CommentEmail">email</label>
+    <input type="email" name="comment[email]" id="CommentEmail" placeholder="email" value="{{ form.email }}"
+      autocorrect="off" autocapitalize="off">
+
+    <label for="CommentBody">message</label>
+    <textarea name="comment[body]" id="CommentBody" placeholder="message">{{ form.body }}</textarea>
+
+    <input type="submit" value="post">
+    {% endform %}
+  </div>
+  {% endif %}
+</div> {% endcomment %}
+
+<div class="article-container">
+  <img src="{{ article.image.src | img_url: '1800x1200' }}" alt={{ article.image.alt }} loading="lazy" />
+  <div class="blog-content">
+    <div class="blog-article">
+      <div class="back-button">
+        <a href="/blogs/news">← Back to blog</a>
+      </div>
+      <h1>{{article.title}}</h1>
+      <p>Last Updated: {{ article.published_at |date: "%B %Y" }}</p>
+      {{ article.content }}
+    </div>
+  </div>
+</div>
+{% render 'guarantee.liquid' %}
+<div class="article-container no-padding-top">
+  <div class="recommended-products">
+    <div class="title">
+      <h1>Recommended Products</h1>
+    </div>
+    <div class="products">
+      {% for product in collections["bestsellers"].products limit: 3%}
+        <a href="{{product.url}}">
+          <div class="product">
+            <div class="img">
+              <img src="{{product.featured_image | image_url}}" alt="{{ product.alt }}" />
+            </div>
+            <div class="text">
+              <h2>{{product.title}}</h2>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+

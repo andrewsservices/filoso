@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-main",
+      "settings": {
+        "quote": "",
+        "name": ""
+      }
+    },
+    "extra-content": {
+      "type": "extra-product-content",
+      "settings": {
+        "showExtraContent": false
+      }
+    },
+    "blue-description-box": {
+      "type": "blue-description-box",
+      "blocks": {
+        "2f9c8179-4d87-474c-8e4f-9ae5a44bf4b5": {
+          "type": "description-box",
+          "settings": {
+            "heading-column1": "Texture. Hold. Volumize.",
+            "subheading-column2": "THIS MULTITASKING POWDER GIVES YOU MANYDIFFERENT STYLES ALL IN ONE BOTTLE.",
+            "rich-text": "<p>With one single bottle, you can replace every product you have in your arsenal.<\/p><p>At only 25 grams, Filoso Hair Styling Powder lasts an average of 2-4 months with daily use. It’s also lightweight, making it easy to carry with you for those quick touch-ups on the go.<\/p><p>To apply it, simply hold horizontally and tap 5-7 times over the hair to create a natural textured finish, instantly giving you the feeling of confidence and satisfaction.<\/p><p>Try it today, and see what Filoso Hair Styling powder can do for you.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "2f9c8179-4d87-474c-8e4f-9ae5a44bf4b5"
+      ],
+      "settings": {
+        "showDescriptionBox": true
+      }
+    },
+    "review": {
+      "type": "review-content",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main",
+    "extra-content",
+    "blue-description-box",
+    "review"
+  ]
+}

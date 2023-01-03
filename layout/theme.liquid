@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>{{ page_title }}</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="description" content="{{ page_description | escape }}" />
+	<link rel="canonical" href="{{ canonical_url }}" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+	<link rel="shortcut icon" type="image/jpg" href="{{ 'favicon.ico' | asset_url }}" />
+	{{
+	content_for_header
+	}}
+	<!-- Header hook for plugins -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css"
+		integrity="sha512-UiVP2uTd2EwFRqPM4IzVXuSFAzw+Vo84jxICHVbOA1VZFUyr4a6giD9O3uvGPFIuB2p3iTnfDVLnkdY7D/SJJQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+	<link rel="stylesheet" href="https://use.typekit.net/srl4avz.css">
+	{{ 'style.css' | asset_url | stylesheet_tag }}
+
+	{{ shop.metafields.loox["global_html_head"] }}
+</head>
+
+<body>
+	{% if template.name == 'cart' or template.name == 'index' or page.url contains 'faqs' or collection.handle == 'all' or collection.handle == 'hair-products' or collection.handle == 'apparel' or collection.handle == 'barber-tools' %}
+		{% section 'header-white' %}
+	{% else %}
+	{% section 'header-dark' %}
+	{% endif %}
+	<!-- navigation wrapper -->
+	<main role="main">
+		{{ content_for_layout }}
+		<!-- homepage only -->
+	</main>
+	{% section 'footer' %}
+
+	<!-- Offcanvas mobile menu -->
+	<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+		<div class="offcanvas-header">
+			<!-- <h5 id="offcanvasRightLabel">Offcanvas right</h5> -->
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<ul class="navigation">
+				<!-- Loops through menu items -->
+				{% for link in linklists.main-menu.links %}
+				<!-- Assigns link title -->
+				{% assign child_list_handle = link.title | handleize %}
+				<!-- If not a parent link, create a regular link -->
+				<li class="nav-item">
+					<a class="{% if link.active %}active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+				</li>
+				{% endfor %}
+				<li><a href="/cart" class="cart">Cart</li>
+			</ul>
+			<div class="social-container">
+				<h4>Follow Us</h4>
+				<ul class="social">
+					<li><a href="https://www.instagram.com/filosobarberbrand"><i class="bi bi-instagram"></i></a>
+					</li>
+					<li><a href="https://www.facebook.com/filosobarberbrand"><i class="bi bi-facebook"></i></a>
+					</li>
+					<li><a href="https://www.youtube.com/c/FrankthamanTV"><i class="bi bi-youtube"></i></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script src="https://apps.elfsight.com/p/platform.js" defer></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<!-- Adds lightbox for product images -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.js"
+		integrity="sha512-UU0D/t+4/SgJpOeBYkY+lG16MaNF8aqmermRIz8dlmQhOlBnw6iQrnt4Ijty513WB3w+q4JO75IX03lDj6qQNA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+	<script defer>
+		(() => {
+			/* get current year */
+			const getYear = () => {
+				const year = document.querySelector('#display-year');
+				if(year){
+					year.innerHTML = new Date().getFullYear();
+				}
+			}
+			document.addEventListener('DOMContentLoaded', getYear());
+
+			/* reveal in animation. doesn't need updating for the most part */
+			{
+				//reveal-in animation
+				const revealElements = document.querySelectorAll(".reveal-in-slow");
+				if (revealElements) {
+					revealElements.forEach((el) => ScrollReveal().reveal(el, { delay: 1500 }));
+				}
+			}
+			{
+				//reveal-in animation
+				const revealElements = document.querySelectorAll(".reveal-in");
+				if (revealElements) {
+					revealElements.forEach((el) => ScrollReveal().reveal(el, { delay: 400 }));
+				}
+			}
+			{
+				//reveal-in from the top
+				const revealElements = document.querySelectorAll(".reveal-in-top");
+				if (revealElements) {
+					revealElements.forEach((el) => ScrollReveal().reveal(el, { delay: 400, origin: "top", distance: "2.5rem" }));
+				}
+			}
+			{
+				//reveal-in from the bottom
+				const revealElements = document.querySelectorAll(".reveal-in-bottom");
+				if (revealElements) {
+					revealElements.forEach((el) => ScrollReveal().reveal(el, { delay: 400, origin: "bottom", distance: "2.5rem" }));
+				}
+			}
+			{
+				//reveal-in from the left
+				const revealElements = document.querySelectorAll(".reveal-in-left");
+				if (revealElements) {
+					revealElements.forEach((el) => ScrollReveal().reveal(el, { delay: 400, origin: "left", distance: "2.5rem" }));
+				}
+			}
+			{
+				//reveal-in from the right
+				const revealElements = document.querySelectorAll(".reveal-in-right");
+				if (revealElements) {
+					revealElements.forEach((el) => ScrollReveal().reveal(el, { delay: 400, origin: "right", distance: "2.5rem" }));
+				}
+			}
+		})();
+	</script>
+
+	{{ shop.metafields.loox["global_html_body"] }}
+</body>
+
+</html>

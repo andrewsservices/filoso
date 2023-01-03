@@ -1,0 +1,192 @@
+<div class="home">
+    <div class="homepage-hero">
+        <video muted playsinline autoplay loop>
+            <source src="{{ 'intro.mp4' | asset_url }}" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <div class="title">
+            <div class="content">
+                <h1>Made by Barbers,<br />for the world.</h1>
+                <section class="fancy-button">
+                    <a href="/collections/all">
+                        <span class="text">SHOP NOW</span>
+                        <span class="line -right"></span>
+                        <span class="line -top"></span>
+                        <span class="line -left"></span>
+                        <span class="line -bottom"></span>
+                    </a>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="who-we-are">
+        <div class="flex">
+            <div class="reveal-in-left">
+                <img src="{{ 'who-we-are.svg' | asset_url }}" class="reveal-in-bottom" loading="lazy"
+                    alt="Who we are - Filoso Brand" />
+                <p class="reveal-in">
+                    Filoso is more than a Barber brand that provides the highest quality tools and products. 
+                    It's a representation of a culture that empowers & inspires to be the sharpest barbers, 
+                    entrepreneurs and members of our familia.
+                </p>
+            </div>
+            <div class="reveal-in-left">&nbsp;</div>
+        </div>
+    </div>
+    <div class="what-we-do">
+        <div class="content reveal-in-bottom">
+            <img src="{{ 'what-we-do.svg' | asset_url }}" loading="lazy" alt="What they say - Filoso Brand" />
+            <iframe src="https://www.youtube.com/embed/wy4sH16PymA" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+        <img src="{{ 'blade-top-v2.svg' | asset_url }}" class="blade-top" alt="Filoso Brand" loading="lazy" />
+    </div>
+    <!-- <div class="blade-container">
+        <div class="flex">
+            <div> <img src="{{ 'info-blade-2.webp' | asset_url }}" class="reveal-in-left" alt="Filoso Blade"
+                    loading="lazy" />
+            </div>
+            <div class="reveal-in">
+                <h2 class="gold">Filoso Blade, our signature product</h2>
+                <p>
+                    Is created from Swedish steel, which is home to metals known for their lack of impurities. Swedish
+                    steel is recognized and awarded for being high-strength, wear resistant and premium steel. Thus, why
+                    we created our Filoso blade from this metal.
+                </p>
+                <a href="/products/filoso-razor-blades" class="secondary-button reveal-in">Learn More</a>
+            </div>
+        </div>
+    </div> -->
+    <div class="blade-container">
+        <div class="homepage-best-sellers">
+            <h2>Best Sellers</h2>
+            <div class="homepage-products">
+                {% for product in collections["bestsellers"].products limit: 4%}
+                <a href="{{product.url}}">
+                    <div class="product">
+                        <div>
+                            <div class="image-container">
+                                <div class="img" style="background: url({{product.featured_image | img_url:'700x'}}) center no-repeat #fff; background-size: contain">&nbsp;</div>
+                            </div>
+                            <div class="text">
+                                <h2>{{product.title}}</h2>
+                                <div class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% render 'guarantee.liquid' %}
+    <div class="button-container">
+        <a href="/collections/all" class="button">Shop Now</a>
+        <div class="free-banner">
+            <p>FREE SHIPPING ON ALL ORDERS OVER $30</p>
+            <p class="blue">LOVE IT OR YOUR MONEY BACK</p>
+        </div>
+    </div>
+    {%- comment -%} <div class="gallery-container">
+        <div class="elfsight-app-65ccfe40-2c69-482a-aeb8-73448cc9df05"></div>
+    </div> {%- endcomment -%}
+    {%- comment -%} <div class="blade-container dark-background">
+        <div class="flex reverse">
+            <div> <img src="{{ 'info-box-2.webp' | asset_url }}" class="reveal-in-left" alt="Filoso Blade"
+                    loading="lazy" />
+            </div>
+            <div class="reveal-in">
+                <h2 class="gold">Sharp and built to last</h2>
+                <p>
+                    Despite being a single use, disposable item in the barbershop, the blade is built to last and can be
+                    loaded into a safety razor and reused at home. The Swedish metal deters rusting and its chiseled
+                    edges are sharp yet fine to smoothly glide across skin with relative ease time and time again.
+                    <br /><br />Want in? Ponte Filoso!
+                </p>
+                <a href="/products/filoso-razor-blades" class="secondary-button reveal-in">Buy Now</a>
+            </div>
+        </div>
+    </div> {%- endcomment -%}
+    {%- comment -%} <div class="blade-container">
+        <div class="flex-callout">
+            <div class="reveal-in-bottom">
+                <img src="{{ 'perks-sanitary.webp' | asset_url }}" alt="Filoso Blade is Sanitary" loading="lazy" />
+                <h3>Sanitary</h3>
+            </div>
+            <div class="reveal-in-bottom">
+                <img src="{{ 'perks-quality.webp' | asset_url }}" alt="Filoso Blade is high quality" loading="lazy" />
+                <h3>High-Quality</h3>
+            </div>
+            <div class="reveal-in-bottom">
+                <img src="{{ 'perks-disposable.webp' | asset_url }}" alt="Filoso Blade is disposable" loading="lazy" />
+                <h3>Disposable</h3>
+            </div>
+            <div class="reveal-in-bottom">
+                <img src="{{ 'perks-barbers.webp' | asset_url }}" alt="Filoso Blade is made by barbers"
+                    loading="lazy" />
+                <h3>Barber Made</h3>
+            </div>
+        </div>
+        <div class="testimonial-container">
+            <div class="elfsight-app-ee969709-e388-4a8d-b3eb-1d0cd1d6b5d5"></div>
+        </div>
+        <div class="social-gallery-container">
+            <div class="elfsight-app-1f2b6e5f-d623-4c81-bf3b-5cf205c1f7a6"></div>
+        </div>
+    </div> {%- endcomment -%}
+    <div class="testimonial-images">
+        <h2>What Others Are Saying</h2>
+        <img class="desktop" src="{{ 'homepage-banner-v2.webp' | asset_url }}" alt="What others are saying" loading="lazy" />
+        <img class="mobile" src="{{ 'homepage-banner-mobile-v2.webp' | asset_url }}" alt="What others are saying" loading="lazy" />
+    </div>
+    <div class="creator-container">
+        <div class="creator-background">
+            <img src="{{ 'blade-bottom.svg' | asset_url }}" class="blade-bottom" loading="lazy" alt="Filoso Brand" />
+            <img src="{{ 'the-creator.svg' | asset_url }}" loading="lazy" class="creator-text reveal-in-bottom"
+                alt="The Creator - Filoso Brand" />
+            <div class="flex">
+                <div>
+                    <div class="picture"></div>
+                </div>
+                <div class="content">
+                    <h2>Francisco Carbajal</h2>
+                    <p>
+                        Francisco Carbajal is a Barber and the co-owner of Filoso Barber brand. 
+                        He has a decade of experience and knows a thing or two about fine quality Barber products. 
+                        He has devoted his 10 years of experience in creating high-quality tools and products 
+                        everyone can rely on. 
+                    </p>
+                    <div class="guarantee-icons">
+                        <div class="icons-row">
+                            <div class="icon-div">
+                                <div class="seventy-percent">
+                                    <img src="{{'fg-moneyback-v2.png' | asset_img_url:'300x'}}" />
+                                </div>
+                                <div class="thirty-percent">
+                                    <h3>100% Money Back<br />Guarantee</h3>
+                                </div>
+                            </div>
+                            <div class="icon-div">
+                                <div class="seventy-percent">
+                                    <img src="{{'fg-cruelty-free-v2.png' | asset_img_url:'300x'}}" />
+                                </div>
+                                <div class="thirty-percent">
+                                    <h3>Animal Cruelty<br />Free</h3>
+                                </div>
+                            </div>
+                            <div class="icon-div">
+                                <div class="seventy-percent">
+                                    <img src="{{'fg-barber-v2.png' | asset_img_url:'300x'}}" />
+                                </div>
+                                <div class="thirty-percent">
+                                    <h3>Made by<br />Master Barbers</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

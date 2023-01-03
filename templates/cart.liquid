@@ -1,0 +1,102 @@
+<div class="max-container cart-container">
+	{% if cart.item_count > 0 %}
+	<form action="/cart" method="post" novalidate id="cart">
+		<div class="cart-items">
+			{% for item in cart.items %}
+			<div class="flex-product padding-bottom">
+				<div>
+					<a href="{{ item.url | within: collections.all }}">
+						<img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}" />
+					</a>
+				</div>
+				<div class="product-name">
+					<a href="{{ item.url }}">
+						{% if product.has_only_default_variant %}
+						{% else %}
+						<div class="small-text">{{ item.variant.title }}</div>
+						{{ item.product.title}}
+						{% endif %}
+					</a>
+				</div>
+			</div>
+			<hr />
+			<div class="flex">
+				<div>
+					<input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}"
+						min="0" />
+					<a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="remove"><span><i
+								class="bi bi-x-square"></i></span></a>
+				</div>
+				<div class="price">
+					<div class="title small-text">price per item</div>
+					<div class="actual-price">{{ item.price | money }}</div>
+				</div>
+				<div class="price">
+					<div class="title small-text">total price</div>
+					{% if item.original_line_price != item.line_price %}
+					{{ item.original_line_price | money }}
+					{% else %}
+					<div class="actual-price">{{ item.final_line_price | money }}</div>
+					{% endif %}
+					{% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+				</div>
+			</div>
+			<hr />
+			{% endfor %}
+		</div>
+		<div>
+			<div>
+				<p class="subtotal">Subtotal: <span>{{ cart.total_price | money }}</span></p>
+				<button type="submit" name="update" class="update">Update</button>
+				<button type="submit" name="checkout" class="checkout">Checkout</button>
+			</div>
+		</div>
+	</form>
+	{% else %}
+	<div class="null-container">
+		<div>
+			<h2>There is nothing currently in your cart.</h2>
+			<a href="/" class="secondary-button">Return to home</a>
+		</div>
+	</div>
+	{% endif %}
+</div>
+
+<!-- <table class="cart-grid">
+	<thead>
+		<th colspan="2">Product</th>
+		<th>Price</th>
+		<th>Qty</th>
+		<th>Total</th>
+	</thead>
+	<tbody>
+		{% for item in cart.items %}
+		<tr>
+			<td>
+				<a href="{{ item.url | within: collections.all }}">
+					<img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}" />
+				</a>
+			</td>
+			<td>
+				<a href="{{ item.url }}">{{ item.product.title }}</a>
+				{% if product.has_only_default_variant %}{% else %}
+				<div class="small-text">{{ item.variant.title }}</div>
+				{% endif %}
+			</td>
+			<td>{{ item.price | money }}</td>
+			<td>
+				<input type="number" name="updates[]" id="updates_{{ item.key }}"
+					value="{{ item.quantity }}" min="0" />
+				<a href="/cart/change?line={{ forloop.index }}&amp;quantity=0"
+					class="remove"><span>remove</span></a>
+			</td>
+			<td>
+				{% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{%
+				endif %}
+				{{ item.line_price | money }}
+				{% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table> -->

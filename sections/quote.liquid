@@ -1,0 +1,25 @@
+
+{% unless section.settings.quote == blank %}
+<div class="quote">
+    <p>{{section.settings.quote}}</p>
+    <h5>- {{section.settings.name}}</h5>
+</div>
+{% endunless %}
+
+{% schema %}
+	{
+		"name":"quote box",
+		"settings":[
+            {
+                "type": "richtext",
+                "id": "quote",
+                "label": "quote"
+            },
+			{
+				"type":"text",
+				"id":"name",
+                "label":"name"
+			}
+		]
+	}
+{% endschema %}

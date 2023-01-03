@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-main",
+      "settings": {
+      }
+    },
+    "extra-content": {
+      "type": "extra-product-content",
+      "settings": {
+      }
+    },
+    "blue-description-box": {
+      "type": "blue-description-box",
+      "settings": {
+      }
+    },
+    "review": {
+      "type": "review-content",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main",
+    "extra-content",
+    "blue-description-box",
+    "review"
+  ]
+}

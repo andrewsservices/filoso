@@ -1,0 +1,121 @@
+.cart-container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 0 auto;
+	padding: 15rem 3rem 5rem 3rem;
+	background: url('cart-bg-4.webp') no-repeat top center;
+	background-size: cover;
+	@media screen and (max-width: $tablet){
+		justify-content: center;
+	}
+	#cart {
+		flex: 1;
+		background: #fff;
+		padding: 3rem;
+		max-width: 40rem;
+		//cart items
+		.cart-items {
+			img {
+				width: 10rem;
+				height: 10rem;
+				object-fit: cover;
+				border: 0.1rem solid $primaryColor;
+				margin: 0.5rem 0rem;
+			}
+			.flex-product {
+				gap: 1.5rem;
+				display: flex;
+				align-items: center;
+			}
+			.flex {
+				display: flex;
+				align-items: center;
+				.product-name {
+					flex: 2;
+				}
+				.price {
+					margin-left: auto;
+					text-align: right;
+				}
+				.actual-price {
+					font-family: $secondary-font;
+
+				}
+				&.padding-bottom {
+					padding-bottom: 3rem;
+				}
+			}
+			.remove {
+				& > span {
+					color: darken(red, 10%);
+					text-decoration: underline;
+					position: relative;
+					left: .5rem;
+					font-size: 1.8rem;
+					&:hover {
+						cursor: pointer;
+					}
+				}
+			}
+			input {
+				max-width: 5rem;
+			}
+			a {
+				color: $primaryColor;
+			}
+			@media screen and (max-width: $tablet){
+				display: block;
+				width: 100%;
+			}
+		}
+		//checkout module
+		& > div:nth-child(2) {
+			flex: 1;
+			margin-top: 3.4rem;
+			border: 0.1rem solid #eee;
+			padding: 1rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: url('checkout-bg.jpg') no-repeat center center;
+			background-size: cover;
+			& > div {
+				flex: 1;
+				padding: 0rem 1rem;
+				button {
+					display: block;
+					width: 100%;
+					margin: 1rem auto;
+					border: none;
+					padding: 0.5rem 0rem;
+					&.update {
+						border: 0.1rem solid #666;
+						background: none;
+						color: #000;
+					}
+					&.checkout {
+						color: #fff;
+						background: $primaryColor;
+					}
+				}
+				p {
+					text-align: center;
+					span {
+						font-family: $secondary-font;
+						font-size: 2.4rem;
+					}
+				}
+			}
+		}
+		@media screen and (max-width: $tablet){
+			display: block;
+		}
+	}	
+	.null-container {
+		h2 {
+			color: #fff;
+			font-family: $secondary-font;
+		}
+	}
+}

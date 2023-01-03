@@ -1,0 +1,602 @@
+{% comment %} {% if product.handle == 'wholesale' %}
+{% section 'password-protected' %}
+{% endif %}
+<div class="product-header-container">
+	{% if product.handle == 'filoso-razor-blades' or product.handle == 'wholesale' %}
+	<div class="filoso-blade"></div>
+	<!-- <img src="{{ 'filoso-blade-header-6.webp' | asset_url }}" alt="Filoso Brand" /> -->
+	{% else %}
+	<img src="{{ 'product-header-v3.webp' | asset_url }}" alt="Filoso Brand" />
+	{% endif %}
+</div>
+<div class="product-wrapper">
+	<div class="product-container">
+		{% if product.handle == 'filoso-razor-blades' or product.handle == 'wholesale' %}
+		<div class="quote reveal-in-left">
+			<h1>The Barber's blade<br />you can rely on</h1>
+		</div>
+		{% else %}
+		<div class="spacer">&nbsp;</div>
+		{% endif %}
+		<div class="sk-product-container reveal-in-slow">
+			<div class="main-swiper">
+				<!-- Featured/Selected image, not powered by swiper.js -->
+				<div id="featured-image">
+					<a href="{{ product.featured_image | img_url: 'grande', scale: 2 }}" target="_blank" data-lity>
+						<img src="{{ product.featured_image | img_url: 'grande', scale: 2 }}"
+							alt="{{ image.alt | escape }}" />
+					</a>
+				</div>
+
+				<!-- Container for thumbnail image swiper -->
+				<div class="swiper">
+					<div class="thumbnail-image-swiper">
+						<div class="swiper-wrapper">
+							{% for image in product.images %}
+							<div class="swiper-slide">
+								<img src="{{ image.src | img_url: 'grande', scale: 2 }}"
+									alt="{{ image.alt | escape }}" />
+							</div>
+							{% endfor %}
+						</div>
+						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-pagination"></div>
+					</div>
+				</div>
+
+				<!-- sharethis module -->
+				<div class="share-container">
+					<h2>Share this with your peers</h2>
+					<div class="elfsight-app-3e4f2e3c-419f-430f-84ed-74ec5e74d741"></div>
+				</div>
+				<div class="flex-callout">
+					<div class="reveal-in-bottom">
+						<img src="{{ 'perks-sanitary.webp' | asset_url }}" alt="Filoso Blade is Sanitary"
+							loading="lazy" />
+						<h3>Sanitary</h3>
+					</div>
+					<div class="reveal-in-bottom">
+						<img src="{{ 'perks-quality.webp' | asset_url }}" alt="Filoso Blade is high quality"
+							loading="lazy" />
+						<h3>High-Quality</h3>
+					</div>
+					<div class="reveal-in-bottom">
+						<img src="{{ 'perks-disposable.webp' | asset_url }}" alt="Filoso Blade is disposable"
+							loading="lazy" />
+						<h3>Disposable</h3>
+					</div>
+					<div class="reveal-in-bottom">
+						<img src="{{ 'perks-barbers.webp' | asset_url }}" alt="Filoso Blade is made by barbers"
+							loading="lazy" />
+						<h3>Barber Made</h3>
+					</div>
+				</div>
+			</div>
+			<div class="main-form">
+				<div class="content">
+					<header>
+						<div class="text-left">
+							<h1 id="productTitle">{{ product.title }}</h1>
+						</div>
+						<div>
+							<h2 class="text-right">
+								{{product.price | money}}
+							</h2>
+						</div>
+					</header>
+					<hr />
+				</div>
+				<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+					<div class="flex">
+						<div class="product-select">
+							<div class="small-text">
+								<span class="inline-circled-number"><span class="number">1</span></span> choose your
+								product
+							</div>
+							<div class="selection-container">
+								<select name="id" id="productSelect" class="form-select">
+									{% for variant in product.variants %} {% if variant.available %} {% if
+									product.has_only_default_variant %}
+									<option value="{{ variant.id }}" selected>{{ product.title }} - {{ variant.price
+										|
+										money_with_currency }}</option>
+									{% else %}
+									<option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price |
+										money_with_currency }}
+									</option>
+									{% endif %} {% else %} {% if product.has_only_default_variant %}
+									<option disabled="disabled" selected>{{ product.title }} - sold out</option>
+									{% else %}
+									<option disabled="disabled">{{ variant.title }} - sold out</option>
+									{% endif %} {% endif %} {% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="quantity">
+							<div class="small-text">
+								<span class="inline-circled-number"><span class="number">2</span></span> choose your
+								quantity
+								<!-- Comment out quantity indicator becaus this shop does not keep track of inventory -->
+								<!-- {% if product.available %}(<span id="quantity-left">0</span> available){% endif %} -->
+							</div>
+							<div class="quantity-controller">
+								<div class="quantity-decrementer">-</div>
+								<div class="quantity-count"><input type="number" id="Quantity" class="form-floating"
+										name="quantity" value="1" min="1" readonly />
+								</div>
+								<div class="quantity-incrementer">+</div>
+							</div>
+							<div class="error-message">Sorry, you have reached the maximum amount available.</div>
+						</div>
+					</div>
+					<div class="button-container">
+						<div>
+							{% if product.available %}
+							<button type="submit" name="add" id="AddToCart" class="primary-button">Add to bag <i
+									class="bi bi-bag-plus"></i></button>
+							{% else %}
+							<button name="add" class="disabled-button" disabled>Sorry! Sold Out <i
+									class="bi bi-emoji-frown"></i></button>
+							{% endif %}
+						</div>
+					</div>
+				</form>
+				<div class="content">
+					<div class="description">{{ product.description }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% if product.handle == 'filoso-razor-blades' or product.handle == 'wholesale' %}
+	<div class="blade-bg">&nbsp;</div>
+	{% endif %}
+	<div class="product-information">
+		{% if product.handle == 'filoso-razor-blades' or product.handle == 'wholesale' %}
+		<div class="video-container">
+			<iframe src="https://www.youtube.com/embed/preOlsw9hd0" title="YouTube video player" frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen></iframe>
+			<a href="#productTitle" class="secondary-button reveal-in">Buy Now</a>
+		</div>
+		<div class="flex">
+			<div>
+				<p>
+					Made with swedish metals, the Filoso Blade is a prime example of high quality products created under
+					the Filoso name.
+				</p>
+			</div>
+			<div>
+				<p>
+					Although intended for one time use at the shop, it is reusable at home as the blade
+					remains sharp for multiple uses.
+				</p>
+			</div>
+		</div>
+		<h2>Snap the Filoso Blade in half</h2>
+		<div class="flex-snap reveal-in-left">
+			<div><img class="reveal-in-slow" src="{{ 'snap-blade.gif' | asset_url }}" alt="Filoso Blade" /></div>
+			<div>
+				<p>Snapping the blade in half offers two unique ways to use the razor.</p>
+			</div>
+		</div>
+		{% endif %}
+		<h2>What others are saying</h2>
+		<div class="testimonial-container">
+			<div class="elfsight-app-ee969709-e388-4a8d-b3eb-1d0cd1d6b5d5"></div>
+		</div>
+	</div>
+</div>
+
+<!-- back to top -->
+<script src="https://apps.elfsight.com/p/platform.js" defer></script>
+<div class="elfsight-app-aea83161-523b-45ba-aa53-7aeabaf19ab2"></div>
+
+{% for var in product.variants %}
+<input hidden id="{{var.inventory_quantity}}" placeholder="{{var.title}}" value="{{var.id}}" class="total-inventory"
+	price="{{var.price}}" />
+{% endfor %}
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script defer>
+	const productPageLogic = () => {
+		const incrementer = document.querySelector('.quantity-controller .quantity-incrementer')
+		const decrementer = document.querySelector('.quantity-controller .quantity-decrementer')
+		const quantityField = document.querySelector('.quantity-controller #Quantity')
+		const variantToggle = document.querySelector('#productSelect')
+		const totalInventory = document.querySelectorAll('.total-inventory')
+		const quantityAvailable = document.querySelector('#quantity-left')
+		const errorMessage = document.querySelector('.error-message')
+		const quantityLogic = (action) => {
+			//if new variant is selected, then reset quantity to 1
+			if (action === 'toggle') {
+				quantityField.value = 1
+			}
+			//foreach item...
+			totalInventory.forEach(item => {
+				//match the chosen product variant
+				if (parseInt(variantToggle.value) === parseInt(item.value)) {
+					//if item is not -99 (inventory quantity not set) then update dom with new available item quantity
+					const quantity = parseInt(item.id)
+					quantityAvailable && quantityAvailable.innerHTML === quantity
+					if (action === 'decrementer') {
+						incrementer.classList.remove('disabled')
+					} else if (parseInt(quantityField.value) === (parseInt(item.id))) {
+						incrementer.classList.add('disabled')
+					} else {
+						incrementer.classList.remove('disabled')
+						if (action === 'incrementer') {
+							quantityField.value++
+						}
+					}
+				}
+			})
+		}
+
+		//incrementer and decrementer for product page quantity
+		if (quantityField) {
+			decrementer.addEventListener('click', () => {
+				quantityLogic('decrementer')
+				quantityField.value > 1 && quantityField.value--
+			})
+			incrementer.addEventListener('click', () => {
+				quantityLogic('incrementer')
+			})
+		}
+		//limits the quantity allowed based on inventory availability
+		if (variantToggle) {
+			//if item is not -99 (inventory quantity not set) then update dom with new available item quantity
+			const quantity = totalInventory[0].id
+			quantityAvailable && quantityAvailable.innerHTML === quantity
+			variantToggle.addEventListener('change', () => {
+				quantityLogic('toggle')
+			})
+		}
+	}
+	document.addEventListener('DOMContentLoaded', productPageLogic())
+
+	/* controls the slider on the product page */
+	const productImageSwiper = () => {
+		//swiper.js for thumbnail swiper
+		let thumbnailSwiper = new Swiper('.thumbnail-image-swiper', {
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev"
+			},
+			slidesPerView: 3
+		})
+		//when thumbnail is selected, the featured image will update
+		const slides = document.querySelectorAll('.swiper-slide')
+		const featuredContainer = document.getElementById('featured-image')
+		//add .active class to first item by default
+		slides[0].classList.add('active')
+		slides.forEach(slide => {
+			slide.addEventListener('click', () => {
+				const slideImage = slide.querySelector('img')
+				const featuredImage = featuredContainer.querySelector('img')
+				const featuredLink = featuredContainer.querySelector('a')
+				featuredImage.setAttribute('src', slideImage.src)
+				featuredLink.setAttribute('href', slideImage.src)
+				slides.forEach(unselected => {
+					unselected.classList.remove('active')
+				})
+				slide.classList.add('active')
+			});
+		})
+	}
+	document.addEventListener('DOMContentLoaded', productImageSwiper());
+</script> {% endcomment %}
+
+<div class="main-container">
+	<div class="product-container">
+		{%- comment -%} {% if product.handle == 'filoso-razor-blades' or product.handle == 'wholesale' %}
+		<div class="quote reveal-in-left">
+			<h1>The Barber's blade<br />you can rely on</h1>
+		</div>
+		{% else %}
+		<div class="spacer">&nbsp;</div>
+		{% endif %} {%- endcomment -%}
+		<div class="sk-product-container reveal-in-slow">
+			<div class="main-swiper">
+				<!-- Featured/Selected image, not powered by swiper.js -->
+				<div id="featured-image">
+					<a href="{{ product.featured_image | img_url: 'grande', scale: 2 }}" target="_blank" data-lity>
+						<img src="{{ product.featured_image | img_url: 'grande', scale: 2 }}"
+							alt="{{ image.alt | escape }}" />
+					</a>
+				</div>
+
+				<!-- Container for thumbnail image swiper -->
+				<div class="swiper">
+					<div class="thumbnail-image-swiper">
+						<div class="swiper-wrapper">
+							{% for image in product.images %}
+							<div class="swiper-slide">
+								<img src="{{ image.src | img_url: 'grande', scale: 2 }}"
+									alt="{{ image.alt | escape }}" />
+							</div>
+							{% endfor %}
+						</div>
+						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-pagination"></div>
+					</div>
+				</div>
+
+				<!-- sharethis module -->
+				
+					
+			</div>
+			<div class="main-form">
+				{% section 'quote' %}
+				<div class="content">
+					<header>
+						<h1 id="productTitle">{{ product.title }}</h1>
+					</header>
+					<div class="reviews">
+						{%- comment -%} <p>4.5</p> 
+						<span>⭐⭐⭐⭐⭐</span>
+						<a>SEE OVER 300 REVIEWS</a> {%- endcomment -%}
+					</div>
+					<div class="description-input">
+						<p>{{product.description}}</p>
+					</div>
+					<div class="price">
+						<h1>{{product.price | money_without_trailing_zeros}}</h1>
+					</div>
+				</div>
+				
+				<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+					<div class="flex">
+						<div class="product-select">
+							<div class="option">
+								{{product.options}}
+							</div>
+							<div class="selection-container">
+								<select name="id" id="productSelect" class="form-select">
+									{% for variant in product.variants %} {% if variant.available %} {% if
+									product.has_only_default_variant %}
+									<option value="{{ variant.id }}" selected>{{ product.title }}</option>
+									{% else %}
+									<option value="{{ variant.id }}">{{ variant.title }}
+									</option>
+									{% endif %} {% else %} {% if product.has_only_default_variant %}
+									<option disabled="disabled" selected>{{ product.title }} - sold out</option>
+									{% else %}
+									<option disabled="disabled">{{ variant.title }} - sold out</option>
+									{% endif %} {% endif %} {% endfor %}
+								</select>
+							</div>
+						</div>
+
+						
+
+						
+						
+						
+						{% comment %} <div class="select-wrapper">	
+							<div class="select">
+								<div class="select__trigger"><span>1</span>
+									<div class="arrow">
+										<img src="{{'triangle.png' | asset_img_url}}"/>
+									</div>
+								</div>
+								<div class="custom-options">
+									{% for i in (1..10) %}
+										<span class="custom-option selected" data-value="{{ i }}">{{ i }}</span>
+									{% endfor %}     
+								</div>
+							</div>
+						</div> {% endcomment %}						
+						
+						
+						
+						
+					</div>
+					<div class="quantity-add-to-cart">
+						{% comment %} <div class="select">
+							<select name="quantity" id="quantity">
+								{% for i in (1..10) %}
+									<option 
+										value="{{ i }}">{{ i }}
+									</option>
+								{% endfor %}         
+							</select>
+						</div> {% endcomment %}
+
+						<div class="quantity">
+							{% comment %} <div class="small-text">
+								<span class="inline-circled-number"><span class="number">2</span></span> choose your
+								quantity
+								<!-- Comment out quantity indicator becaus this shop does not keep track of inventory -->
+								<!-- {% if product.available %}(<span id="quantity-left">0</span> available){% endif %} -->
+							</div>  {% endcomment %}
+							<div class="quantity-controller">
+								<div class="quantity-decrementer">-</div>
+								<div class="quantity-count"><input type="number" id="Quantity" class="form-floating"
+										name="quantity" value="1" min="1" readonly />
+								</div>
+								<div class="quantity-incrementer">+</div> 
+								
+									
+								<div class="button-container">
+								
+							</div>
+							</div>
+							
+							
+						</div>
+						
+							{% if product.available %}
+								<button type="submit" name="add" id="AddToCart">ADD TO CART<i></i></button>
+									{% else %}
+								<button name="add" class="disabled-button" disabled>Sorry! Sold Out <i
+									class="bi bi-emoji-frown"></i></button>
+							{% endif %}
+						</div>
+				</form>
+				{% comment %} <div class="content">
+					<div class="description">{{ product.description }}</div>
+				</div> {% endcomment %}
+			</div>
+		</div>
+	</div>
+	{%- comment -%} {% if product.handle == 'filoso-razor-blades' or product.handle == 'wholesale' %}
+	<div class="blade-bg">&nbsp;</div>
+	{% endif %} {%- endcomment -%}
+	<div class="product-information">
+		{%- comment -%} {% if product.handle == 'filoso-razor-blades' or product.handle == 'wholesale' %}
+		<div class="video-container">
+			<iframe src="https://www.youtube.com/embed/preOlsw9hd0" title="YouTube video player" frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen></iframe>
+			<a href="#productTitle" class="secondary-button reveal-in">Buy Now</a>
+		</div>
+		<div class="flex">
+			<div>
+				<p>
+					Made with swedish metals, the Filoso Blade is a prime example of high quality products created under
+					the Filoso name.
+				</p>
+			</div>
+			<div>
+				<p>
+					Although intended for one time use at the shop, it is reusable at home as the blade
+					remains sharp for multiple uses.
+				</p>
+			</div>
+		</div>
+		<h2>Snap the Filoso Blade in half</h2>
+		<div class="flex-snap reveal-in-left">
+			<div><img class="reveal-in-slow" src="{{ 'snap-blade.gif' | asset_url }}" alt="Filoso Blade" /></div>
+			<div>
+				<p>Snapping the blade in half offers two unique ways to use the razor.</p>
+			</div>
+		</div>
+		{% endif %} {%- endcomment -%}
+	</div>
+	{% section 'extra-product-content' %}
+</div>
+
+
+<script src="https://apps.elfsight.com/p/platform.js" defer></script>
+<div class="elfsight-app-aea83161-523b-45ba-aa53-7aeabaf19ab2"></div>
+
+{% for var in product.variants %}
+<input hidden id="{{var.inventory_quantity}}" placeholder="{{var.title}}" value="{{var.id}}" class="total-inventory"
+	price="{{var.price}}" />
+{% endfor %}
+
+<script async src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script defer>
+	const productPageLogic = () => {
+		const incrementer = document.querySelector('.quantity-controller .quantity-incrementer')
+		const decrementer = document.querySelector('.quantity-controller .quantity-decrementer')
+		const quantityField = document.querySelector('.quantity-controller #Quantity')
+		const variantToggle = document.querySelector('#productSelect')
+		const totalInventory = document.querySelectorAll('.total-inventory')
+		const quantityAvailable = document.querySelector('#quantity-left')
+		const errorMessage = document.querySelector('.error-message')
+		const quantityLogic = (action) => {
+			//if new variant is selected, then reset quantity to 1
+			if (action === 'toggle') {
+				quantityField.value = 1
+			}
+			//foreach item...
+			totalInventory.forEach(item => {
+				//match the chosen product variant
+				if (parseInt(variantToggle.value) === parseInt(item.value)) {
+					//if item is not -99 (inventory quantity not set) then update dom with new available item quantity
+					const quantity = parseInt(item.id)
+					quantityAvailable && quantityAvailable.innerHTML === quantity
+					if (action === 'decrementer') {
+						incrementer.classList.remove('disabled')
+					} else if (parseInt(quantityField.value) === (parseInt(item.id))) {
+						incrementer.classList.add('disabled')
+					} else {
+						incrementer.classList.remove('disabled')
+						if (action === 'incrementer') {
+							quantityField.value++
+						}
+					}
+				}
+			})
+		}
+
+		//incrementer and decrementer for product page quantity
+		if (quantityField) {
+			decrementer.addEventListener('click', () => {
+				quantityLogic('decrementer')
+				quantityField.value > 1 && quantityField.value--
+			})
+			incrementer.addEventListener('click', () => {
+				quantityLogic('incrementer')
+			})
+		}
+		//limits the quantity allowed based on inventory availability
+		if (variantToggle) {
+			//if item is not -99 (inventory quantity not set) then update dom with new available item quantity
+			const quantity = totalInventory[0].id
+			quantityAvailable && quantityAvailable.innerHTML === quantity
+			variantToggle.addEventListener('change', () => {
+				quantityLogic('toggle')
+			})
+		}
+	}
+	document.addEventListener('DOMContentLoaded', productPageLogic())
+
+	/* controls the slider on the product page */
+	const productImageSwiper = () => {
+		//swiper.js for thumbnail swiper
+		let thumbnailSwiper = new Swiper('.thumbnail-image-swiper', {
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev"
+			},
+			slidesPerView: 3
+		})
+		//when thumbnail is selected, the featured image will update
+		const slides = document.querySelectorAll('.swiper-slide')
+		const featuredContainer = document.getElementById('featured-image')
+		//add .active class to first item by default
+		slides[0].classList.add('active')
+		slides.forEach(slide => {
+			slide.addEventListener('click', () => {
+				const slideImage = slide.querySelector('img')
+				const featuredImage = featuredContainer.querySelector('img')
+				const featuredLink = featuredContainer.querySelector('a')
+				featuredImage.setAttribute('src', slideImage.src)
+				featuredLink.setAttribute('href', slideImage.src)
+				slides.forEach(unselected => {
+					unselected.classList.remove('active')
+				})
+				slide.classList.add('active')
+			});
+		})
+	}
+	document.addEventListener('DOMContentLoaded', productImageSwiper());
+
+
+</script> 
+
+
+
+
+{% if product.metafields.loox.num_reviews %}
+<script id="looxSchemaJson" type="application/ld+json">
+{
+	"@context": "http://schema.org",
+	"@type": "Product",
+	"@id": {{ canonical_url | json }},
+	"aggregateRating": {
+		"@type": "AggregateRating",
+		"ratingValue": "{{ product.metafields.loox.avg_rating }}",
+		"reviewCount": "{{ product.metafields.loox.num_reviews }}"
+	},
+	"name": {{ product.title | json }}
+}
+</script>
+{% endif %}
+
+
+	<div id="looxReviews" data-product-id="{{product.id}}" class="loox-reviews-default">{{ product.metafields.loox.reviews }}</div>

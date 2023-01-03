@@ -1,0 +1,209 @@
+$thick: 3px;
+$pad: 0.25em;
+$extra: calc(#{$pad} * 1.2);
+$color: #BE9F38;
+
+.fancy-button {
+	text-align: center;
+	margin: 0 auto;
+	a {
+		color: #fff;
+		padding: $pad $extra;
+		display: inline-block;
+		border: $thick solid transparent;
+		text-decoration: none;
+		position: relative;
+		font-size: 1.5em;
+		cursor: pointer;
+		letter-spacing: 0.07em;
+		.text {
+			// padding: 0 0.3em;
+			font-family: $primary-font;
+			font-weight: 300;
+			transform: translate3d(0, $pad, 0);
+			display: block;
+			color: #fff;
+			transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1) 0.4s;
+		}
+
+		&:after {
+			position: absolute;
+			content: '';
+			bottom: -$thick;
+			left: $extra;
+			right: $extra;
+			height: $thick;
+			background: $color;
+			//z-index: -1;
+			transition: transform 0.8s cubic-bezier(1, 0, 0.37, 1) 0.2s, right 0.2s cubic-bezier(0.04, 0.48, 0, 1) 0.6s, left 0.4s cubic-bezier(0.04, 0.48, 0, 1) 0.6s;
+			transform-origin: left;
+		}
+	}
+
+	.line {
+		position: absolute;
+		background: $color;
+
+		&.-right,
+		&.-left {
+			width: $thick;
+			bottom: -$thick;
+			top: -$thick;
+			transform: scale3d(1, 0, 1);
+		}
+
+		&.-top,
+		&.-bottom {
+			height: $thick;
+			left: -$thick;
+			right: -$thick;
+			transform: scale3d(0, 1, 1);
+		}
+
+		&.-right {
+			right: -$thick;
+			transition: transform 0.1s cubic-bezier(1, 0, 0.65, 1.01) 0.23s;
+			transform-origin: top;
+		}
+
+		&.-top {
+			top: -$thick;
+			transition: transform 0.08s linear 0.43s;
+			transform-origin: left;
+		}
+
+		&.-left {
+			left: -$thick;
+			transition: transform 0.08s linear 0.51s;
+			transform-origin: bottom;
+		}
+
+		&.-bottom {
+			bottom: -$thick;
+			transition: transform 0.3s cubic-bezier(1, 0, 0.65, 1.01);
+			transform-origin: right;
+		}
+	}
+
+	a:hover,
+	a:active {
+		.text {
+			transform: translate3d(0, 0, 0);
+			transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1) 0.4s;
+		}
+
+		&:after {
+			transform: scale3d(0, 1, 1);
+			right: -$thick;
+			left: -$thick;
+			transform-origin: right;
+			transition: transform 0.2s cubic-bezier(1, 0, 0.65, 1.01) 0.17s, right 0.2s cubic-bezier(1, 0, 0.65, 1.01), left 0s 0.3s;
+		}
+
+		.line {
+			transform: scale3d(1, 1, 1);
+
+			&.-right {
+				transition: transform 0.1s cubic-bezier(1, 0, 0.65, 1.01) 0.2s;
+				transform-origin: bottom;
+			}
+
+			&.-top {
+				transition: transform 0.08s linear 0.4s;
+				transform-origin: right;
+			}
+
+			&.-left {
+				transition: transform 0.08s linear 0.48s;
+				transform-origin: top;
+			}
+
+			&.-bottom {
+				transition: transform 0.5s cubic-bezier(0, 0.53, 0.29, 1) 0.56s;
+				transform-origin: left;
+			}
+		}
+	}
+}
+
+@mixin button($background) {
+	padding: 1.5rem 3rem;
+	background: $background;
+	text-decoration: none;
+	display: block;
+	text-align: center;
+	color: #fff;
+	text-transform: uppercase;
+	font-family: $primary-font;
+	transition: all 0.25s ease-in-out;
+	margin: 3rem 0rem;
+	border: none;
+	font-weight: bold;
+	&:hover {
+		text-decoration: none;
+		color: #fff;
+		background: darken($background, 5%);
+	}
+	i {
+		font-size: 1.3rem;
+		position: relative;
+		bottom: 0.2rem;
+		padding-left: .5rem;
+	}
+}
+
+.secondary-button {
+	@include button($secondaryColor);
+}
+
+.primary-button {
+	@include button($primaryColor);
+}
+
+.disabled-button {
+	@include button(#777);
+	&:hover {
+		cursor: not-allowed;
+	}
+}
+
+.animated-icon-button {
+	padding: 1.5rem 3rem;
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	color: #333;
+	font-family: $secondary-font;
+	transition: all .25s ease-in-out;
+	margin: 3rem 0rem;
+	border: none;
+	font-size: 3rem;
+	background: $primaryColor;
+	position: relative;
+	img {
+		width: 4rem;
+		height: auto;
+		position: relative;
+		bottom: .2rem;
+		margin-left: 2rem;
+		animation: leftToRight 2s ease-in-out infinite;
+	}
+	&:hover {
+		color: #000;
+		cursor: pointer;
+		font-size: 3.5rem;
+		background: lighten($primaryColor, 5%);
+	}
+}
+
+@keyframes leftToRight {
+	0% {
+		left: 0;
+	}
+	50% {
+		left: 1rem;
+	}
+	100% {
+		left: 0;
+	}
+}

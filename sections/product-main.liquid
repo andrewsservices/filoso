@@ -1,0 +1,301 @@
+<div class="main-container">
+	<div class="product-container">
+		{%- comment -%} {% if product.handle == 'filoso-razor-blades' or product.handle == 'wholesale' %}
+		<div class="quote reveal-in-left">
+			<h1>The Barber's blade<br />you can rely on</h1>
+		</div>
+		{% else %}
+		<div class="spacer">&nbsp;</div>
+		{% endif %} {%- endcomment -%}
+		<div class="sk-product-container reveal-in-slow">
+			<div class="main-swiper">
+				<!-- Featured/Selected image, not powered by swiper.js -->
+				<div id="featured-image">
+					<a href="{{ product.featured_image | img_url: 'grande', scale: 2 }}" target="_blank" data-lity>
+						<img src="{{ product.featured_image | img_url: 'grande', scale: 2 }}"
+							alt="{{ image.alt | escape }}" />
+					</a>
+				</div>
+
+				<!-- Container for thumbnail image swiper -->
+				<div class="swiper">
+					<div class="thumbnail-image-swiper">
+						<div class="swiper-wrapper">
+							{% for image in product.images %}
+							<div class="swiper-slide">
+								<img src="{{ image.src | img_url: 'grande', scale: 2 }}"
+									alt="{{ image.alt | escape }}" />
+							</div>
+							{% endfor %}
+						</div>
+						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-pagination"></div>
+					</div>
+				</div>
+
+				<!-- sharethis module -->
+				
+					
+			</div>
+			<div class="main-form">
+				{% unless section.settings.quote == blank %}
+                <div class="quote">
+                    <p>{{section.settings.quote}}</p>
+                    <h5>- {{section.settings.name}}</h5>
+                </div>
+                {% endunless %}
+				<div class="content">
+					<header>
+						<h1 id="productTitle">{{ product.title }}</h1>
+					</header>
+					<div class="reviews">
+						<div class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div>
+					</div>
+					<div class="description-input">
+						<p>{{product.description}}</p>
+					</div>
+					<div class="price">
+						<h1>{{product.price | money_without_trailing_zeros}}</h1>
+					</div>
+				</div>
+				
+				<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+					<div class="flex">
+						<div class="product-select">
+							<div class="option">
+								{{product.options}}
+							</div>
+							<div class="selection-container">
+								<select name="id" id="productSelect" class="form-select">
+									{% for variant in product.variants %} {% if variant.available %} {% if
+									product.has_only_default_variant %}
+									<option value="{{ variant.id }}" selected>{{ product.title }}</option>
+									{% else %}
+									<option value="{{ variant.id }}">{{ variant.title }}
+									</option>
+									{% endif %} {% else %} {% if product.has_only_default_variant %}
+									<option disabled="disabled" selected>{{ product.title }} - sold out</option>
+									{% else %}
+									<option disabled="disabled">{{ variant.title }} - sold out</option>
+									{% endif %} {% endif %} {% endfor %}
+								</select>
+							</div>
+						</div>
+
+						
+
+						
+						
+						
+						{% comment %} <div class="select-wrapper">	
+							<div class="select">
+								<div class="select__trigger"><span>1</span>
+									<div class="arrow">
+										<img src="{{'triangle.png' | asset_img_url}}"/>
+									</div>
+								</div>
+								<div class="custom-options">
+									{% for i in (1..10) %}
+										<span class="custom-option selected" data-value="{{ i }}">{{ i }}</span>
+									{% endfor %}     
+								</div>
+							</div>
+						</div> {% endcomment %}						
+						
+						
+						
+						
+					</div>
+					<div class="quantity-add-to-cart">
+						{% comment %} <div class="select">
+							<select name="quantity" id="quantity">
+								{% for i in (1..10) %}
+									<option 
+										value="{{ i }}">{{ i }}
+									</option>
+								{% endfor %}         
+							</select>
+						</div> {% endcomment %}
+
+						<div class="quantity">
+							{% comment %} <div class="small-text">
+								<span class="inline-circled-number"><span class="number">2</span></span> choose your
+								quantity
+								<!-- Comment out quantity indicator becaus this shop does not keep track of inventory -->
+								<!-- {% if product.available %}(<span id="quantity-left">0</span> available){% endif %} -->
+							</div>  {% endcomment %}
+							<div class="quantity-controller">
+								<div class="quantity-decrementer">-</div>
+								<div class="quantity-count"><input type="number" id="Quantity" class="form-floating"
+										name="quantity" value="1" min="1" readonly />
+								</div>
+								<div class="quantity-incrementer">+</div> 
+								
+									
+								<div class="button-container">
+								
+							</div>
+							</div>
+							
+							
+						</div>
+						
+							{% if product.available %}
+								<button type="submit" name="add" id="AddToCart">ADD TO CART<i></i></button>
+									{% else %}
+								<button name="add" class="disabled-button" disabled>Sorry! Sold Out <i
+									class="bi bi-emoji-frown"></i></button>
+							{% endif %}
+						</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://apps.elfsight.com/p/platform.js" defer></script>
+<div class="elfsight-app-aea83161-523b-45ba-aa53-7aeabaf19ab2"></div>
+
+{% for var in product.variants %}
+<input hidden id="{{var.inventory_quantity}}" placeholder="{{var.id}}" value="{{var.price}}" class="total-inventory"
+	name="{{var.title}}" />
+{% endfor %}
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script defer>
+
+	const productPageLogic = () => {
+		const incrementer = document.querySelector('.quantity-controller .quantity-incrementer')
+		const decrementer = document.querySelector('.quantity-controller .quantity-decrementer')
+		const quantityField = document.querySelector('.quantity-controller #Quantity')
+		const variantToggle = document.querySelector('#productSelect')
+		const totalInventory = document.querySelectorAll('.total-inventory')
+		const quantityAvailable = document.querySelector('#quantity-left')
+		const errorMessage = document.querySelector('.error-message')
+		const price = document.querySelector('.price h1')
+		const variantItems = document.querySelectorAll('.total-inventory')
+		const variantOptions = document.querySelectorAll('#productSelect option')
+
+		//variantItems.forEach((item) => console.log(item.value))
+		//console.log('options: ', variantOptions)
+
+		const arr = []
+		variantItems.forEach((item) => {
+			const object = {
+				id: item.placeholder,
+				price: '$' + item.value.slice(0,-2)
+			}
+			arr.push(object)
+		})
+
+		const quantityLogic = (action) => {
+			//if new variant is selected, then reset quantity to 1
+			if (action === 'toggle') {
+				quantityField.value = 1
+			}
+			//foreach item...
+			totalInventory.forEach(item => {
+				//match the chosen product variant
+				if (parseInt(variantToggle.value) === parseInt(item.value)) {
+					//if item is not -99 (inventory quantity not set) then update dom with new available item quantity
+					const quantity = parseInt(item.id)
+					quantityAvailable && quantityAvailable.innerHTML === quantity
+					if (action === 'decrementer') {
+						incrementer.classList.remove('disabled')
+					} else if (parseInt(quantityField.value) === (parseInt(item.id))) {
+						incrementer.classList.add('disabled')
+					} else {
+						incrementer.classList.remove('disabled')
+						if (action === 'incrementer') {
+							quantityField.value++
+						}
+					}
+				}
+			})
+		}
+
+		//incrementer and decrementer for product page quantity
+		if (quantityField) {
+			decrementer.addEventListener('click', () => {
+				quantityLogic('decrementer')
+				quantityField.value > 1 && quantityField.value--
+			})
+			incrementer.addEventListener('click', () => {
+				quantityLogic('incrementer')
+			})
+		}
+		//limits the quantity allowed based on inventory availability
+		if (variantToggle) {
+			//if item is not -99 (inventory quantity not set) then update dom with new available item quantity
+			const quantity = totalInventory[0].id
+			quantityAvailable && quantityAvailable.innerHTML === quantity
+			variantToggle.addEventListener('change', () => {
+				quantityLogic('toggle')
+			})
+
+			//update the price of the item when the select option is toggled
+			variantToggle.addEventListener('input', () => {
+				arr.find(object => {
+					if(object.id === variantToggle.options[variantToggle.selectedIndex].value){
+						return price.innerHTML = object.price
+					}
+				})
+			})
+		}
+	}
+	document.addEventListener('DOMContentLoaded', productPageLogic())
+
+	/* controls the slider on the product page */
+	const productImageSwiper = () => {
+		//swiper.js for thumbnail swiper
+		let thumbnailSwiper = new Swiper('.thumbnail-image-swiper', {
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev"
+			},
+			slidesPerView: 3
+		})
+		//when thumbnail is selected, the featured image will update
+		const slides = document.querySelectorAll('.swiper-slide')
+		const featuredContainer = document.getElementById('featured-image')
+		//add .active class to first item by default
+		slides[0].classList.add('active')
+		slides.forEach(slide => {
+			slide.addEventListener('click', () => {
+				const slideImage = slide.querySelector('img')
+				const featuredImage = featuredContainer.querySelector('img')
+				const featuredLink = featuredContainer.querySelector('a')
+				featuredImage.setAttribute('src', slideImage.src)
+				featuredLink.setAttribute('href', slideImage.src)
+				slides.forEach(unselected => {
+					unselected.classList.remove('active')
+				})
+				slide.classList.add('active')
+			});
+		})
+	}
+	document.addEventListener('DOMContentLoaded', productImageSwiper());
+
+
+</script> 
+
+
+
+{% schema %}
+	{
+		"name":"quote box",
+		"settings":[
+            {
+                "type": "richtext",
+                "id": "quote",
+                "label": "quote"
+            },
+			{
+				"type":"text",
+				"id":"name",
+                "label":"name"
+			}
+		]
+	}
+{% endschema %}

@@ -1,0 +1,101 @@
+// stylesheets
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+
+// custom fonts
+@font-face {
+	font-family: Old London;
+	src: url('OldLondon.ttf');
+	font-display: swap;
+}
+
+// fonts
+$primary-font: 'Nunito', sans-serif;
+$secondary-font: 'Old London', sans-serif;
+
+// colors
+$primaryColor: #243465;
+$secondaryColor: #BE9F38;
+
+// width
+$mid-width: 90rem;
+$max-width: 144rem;
+
+// viewports
+$tablet: 900px;
+$mobile: 600px;
+$iphonese: 320px;
+
+// styles
+@import './header';
+@import './footer';
+@import './components';
+@import './home';
+@import './buttons';
+@import './collection';
+@import './products';
+@import './cart';
+@import './blog';
+@import './swiper';
+@import './blue-description-box';
+@import './extra-content';
+@import './review-content';
+
+// globals
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 62.5%;
+	scroll-behavior: smooth;
+}
+
+body,
+html {
+	padding: 0;
+	margin: 0;
+	background: $primaryColor;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: $primary-font;
+	font-weight: bold;
+}
+
+p,
+div,
+li,
+a,
+span,
+input,
+textarea,
+form {
+	font-family: $primary-font;
+	font-weight: 300;
+	font-size: 1.8rem;
+}
+
+a,
+a:hover {
+	text-decoration: none;
+}
+
+a {
+	transition: all .25s ease-in-out;
+	&:hover {
+		color: $primaryColor;
+	}
+}
+
+.gold {
+	padding-bottom: .5rem;
+	display: inline-block;
+	border-bottom: .2rem solid $secondaryColor;
+}

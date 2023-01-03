@@ -1,0 +1,79 @@
+<div class="blog-container">
+  <div class="header">
+    <h1>The Filoso Blog</h1>
+  </div>
+  <div class="blogs">
+  {% paginate blog.articles by 6 %}
+    {% for article in blog.articles %}
+    {% assign article_img = article.image.src %}
+      <div class="blog">
+        <a href="{{article.url}}">
+          <div 
+            class="blog-image"
+            style="background: url({{article_img | img_url:'700x'}}); background-repeat:no-repeat; background-size:cover; background-position:center"
+            >&nbsp;
+          </div>
+        </a>
+        <div class="blog-content">
+          <div class="blog-date">
+            <p>{{ article.updated_at |date: "%B %Y" | upcase}}</p>
+          </div>
+          <h5>{{article.title}}</h5>
+          <div class="truncated-paragraph">
+            {{ article.content | truncate: 150}}
+          </div>
+          <div class="read-more">
+            <a href="{{article.url}}">READ MORE</a> 
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="paginate">
+          {%- if paginate.pages > 1 -%}
+              <nav role="navigation">
+                <ol class="pagination">
+                  {%- if paginate.previous-%}
+                    <li>
+                      <a href="{{ paginate.previous.url }}">
+                        <span aria-hidden="true">&lt;</span>
+                         
+                      </a>
+                    </li>
+                  
+                  {%- endif -%}
+
+                  {%- for part in paginate.parts -%}
+                    {%- if part.is_link -%}
+                      <li class="non-active">
+                        <a href="{{ part.url }}">
+                          <span class="visuallyhidden"></span> {{ part.title }}
+                        </a>
+                      </li>
+                    {%- else -%}
+                      {%- if part.title == paginate.current_page -%}
+                        <li class="active" aria-current="page">
+                          <span class="visuallyhidden"></span> {{ part.title }}
+                        </li>
+                      {%- else -%}
+                        <li>
+                          <span class="visuallyhidden"></span> {{ part.title }}
+                        </li>
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+
+                  {%- if paginate.next -%}
+                      <li>
+                        <a href="{{ paginate.next.url }}">
+                          <span aria-hidden="true">&gt;</span>
+                        </a>
+                      </li>
+                   
+                    {%- endif -%}
+                </ol>
+              </nav>
+            {%- endif -%}
+          {%- endpaginate -%}
+        </div>
+</div>

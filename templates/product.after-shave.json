@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-main",
+      "settings": {
+        "quote": "",
+        "name": ""
+      }
+    },
+    "extra-content": {
+      "type": "extra-product-content",
+      "settings": {
+        "showExtraContent": false
+      }
+    },
+    "blue-description-box": {
+      "type": "blue-description-box",
+      "settings": {
+      }
+    },
+    "review": {
+      "type": "review-content",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main",
+    "extra-content",
+    "blue-description-box",
+    "review"
+  ]
+}
